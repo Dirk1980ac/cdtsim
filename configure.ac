@@ -1,20 +1,11 @@
 dnl Process this file with autoconf to produce a configure script.
-dnl Created by Anjuta application wizard.
 
-AC_INIT(cdtsim, 0.9.1a)
-
+AC_INIT(cdtsim, 1.0.0)
 AC_CONFIG_HEADERS([config.h])
-
 AM_INIT_AUTOMAKE([1.11])
-
 AM_SILENT_RULES([yes])
-
+AM_MAINTAINER_MODE([enable])
 AC_PROG_CC
-
-
-
-
-
 
 dnl ***************************************************************************
 dnl Check for Windows
@@ -38,16 +29,5 @@ esac
 AM_CONDITIONAL(PLATFORM_WIN32, test x"$platform_win32" = "xyes")
 AM_CONDITIONAL(NATIVE_WIN32, test x"$native_win32" = "xyes")
 
-
-
-
 PKG_CHECK_MODULES(CDTSIM, [gtk+-3.0 >= 2.90.3 ])
-
-
-
-
-AC_OUTPUT([
-Makefile
-src/Makefile
-
-])
+AC_OUTPUT([Makefile src/Makefile rpm/Makefile])

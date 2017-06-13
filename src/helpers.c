@@ -7,20 +7,21 @@
  *  <dirk.gottschalk1980@googlemail.com>
  **************************************************************************/
 
-#include "garmin-servertest.h"
+#include "cdtsim.h"
 
 unsigned char checksum (unsigned char arr[], int len) {
-   int sum = 0;
-   for(int i = 0; i < (len-1); ++i) {
-      sum += arr[i];
-   }
-   //modulo 256 sum
-   sum %= 256;
+	int sum = 0;
+	for(int i = 0; i < (len-1); ++i) {
+		sum += arr[i];
+	}
 
-   char ch = sum;
+	// Modulo 256 sum
+	sum %= 256;
 
-   //twos complement
-   unsigned char twoscompl = ~ch + 1;
+	char ch = sum;
 
-   return twoscompl;
+	// Two's complement
+	unsigned char twoscompl = ~ch + 1;
+
+	return twoscompl;
 }

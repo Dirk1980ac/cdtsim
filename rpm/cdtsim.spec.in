@@ -1,0 +1,57 @@
+Name:		cdtsim
+Version:	@PACKAGE_VERSION@
+Release:	1
+Summary:	Emulates Garmin CDT-Packets for Server-Tests
+License:	GPLv2+
+Group:		Applications
+Source0:	%{name}-%{version}.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRequires:  libtool
+BuildRequires:	gcc
+BuildRequires:	gtk3-devel
+Requires:	gtk3
+
+%description
+This program emulates Garmin CDT-Packets for Server-Tests
+
+
+%prep
+%setup -q -n %{name}-%{version}
+
+%build
+%configure 
+make %{?_smp_mflags}
+
+%install
+rm -rf ${RPM_BUILD_ROOT}
+make install DESTDIR=$RPM_BUILD_ROOT
+
+# install -p -m 755 -D cdtsim ${RPM_BUILD_ROOT}%{_bindir}/cdtsim
+
+%post
+
+%postun
+
+%check
+make check
+
+%clean
+rm -rf ${RPM_BUILD_ROOT}
+
+%files
+%defattr(-,root,root)
+%{_bindir}/cdtsim
+%{_docdir}/cdtsim/README
+%{_docdir}/cdtsim/COPYING
+%{_docdir}/cdtsim/ChangeLog
+%{_docdir}/cdtsim/NEWS
+%{_docdir}/cdtsim/AUTHORS
+%{_docdir}/cdtsim/INSTALL
+
+%define date    %(echo `LC_ALL="C" date +"%a %b %d %Y"`)
+
+%changelog
+
+* Tue Jun 13 2017 Dirk Gottschalk <dirk.gottschalk1980@googlemail.com> - 0.0-1
+- Initial RPM version
+

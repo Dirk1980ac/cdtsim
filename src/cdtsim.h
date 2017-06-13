@@ -26,6 +26,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 G_BEGIN_DECLS
 
 #define CDTSIM_TYPE_APPLICATION             (cdtsim_get_type ())
@@ -54,6 +55,8 @@ GType cdtsim_get_type (void) G_GNUC_CONST;
 Cdtsim *cdtsim_new (void);
 
 /* Callbacks */
+void send_packet (GtkButton *send, GObject *data);
+void quit_app (GtkButton* button, GApplication *app);
 
 G_END_DECLS
 

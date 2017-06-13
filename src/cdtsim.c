@@ -18,9 +18,6 @@
  */
 #include "cdtsim.h"
 
-
-
-
 G_DEFINE_TYPE (Cdtsim, cdtsim, GTK_TYPE_APPLICATION);
 
 /* ANJUTA: Macro CDTSIM_APPLICATION gets Cdtsim - DO NOT REMOVE */
@@ -138,8 +135,8 @@ static void cdtsim_new_window (GApplication *app, GFile *file) {
 	g_signal_connect (send_button, "clicked", G_CALLBACK (send_packet),
 	                  send_button);
 
-	g_signal_connect (quit_button, "clicked", G_CALLBACK (gtk_main_quit),
-	                  NULL);
+	g_signal_connect (quit_button, "clicked", G_CALLBACK (quit_app),
+	                  app);
 
 	gtk_widget_show_all (GTK_WIDGET (window));
 }
@@ -152,11 +149,10 @@ cdtsim_activate (GApplication *application)
 	cdtsim_new_window (application, NULL);
 }
 
-static void
-cdtsim_open (GApplication  *application,
-                     GFile        **files,
-                     gint           n_files,
-                     const gchar   *hint)
+static void cdtsim_open (GApplication *application,
+                         GFile        **files,
+                         gint         n_files,
+                         const gchar  *hint)
 {
 	gint i;
 

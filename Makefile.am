@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## Created by Anjuta
 
-SUBDIRS = src 
+SUBDIRS = src rpm
 
 dist_doc_DATA = \
 	README \
@@ -10,8 +10,6 @@ dist_doc_DATA = \
 	ChangeLog \
 	INSTALL \
 	NEWS
-
-
 
 # Remove doc directory on uninstall
 uninstall-local:

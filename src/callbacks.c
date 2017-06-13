@@ -8,7 +8,7 @@
  **************************************************************************/
 
 #include <glib.h>
-#include "garmin-servertest.h"
+#include "cdtsim.h"
 #include "helpers.h"
 
 void send_packet (GtkButton *send, GObject *data) {
@@ -36,7 +36,7 @@ void send_packet (GtkButton *send, GObject *data) {
 	packet[1] = 217;
 	packet[2] = tx_datalen;
 	packet[3] = 0;
-	strncpy((unsigned char *)packet[4], queue_data, datalen);
+	memcpy(&packet[4], queue_data, datalen);
 	packet[pack_size - 3] = checksum ( packet, datalen + 4 );
 	packet [pack_size - 2] = 16;
 	packet [pack_size - 1] = 3;
@@ -52,7 +52,15 @@ void send_packet (GtkButton *send, GObject *data) {
 
 	/* TODO: Update statusbar with error or success */
 	if ( g_socket_send_to (sock, dst, (const gchar*) packet, pack_size, NULL,
-	                       &sockerr) == -1 ) {
-		// gtk_statusbar_push ()
-	}
+	                       &sockerr) == -1 )
+		gtk_statusbar_push (GTK_STATUSBAR (statusbar), gtk_statusbar_get_context_id (GTK_STATUSBAR (statusbar), "ERROR"), sockerr->message);
+
+	else
+		gtk_statusbar_push (GTK_STATUSBAR (statusbar), gtk_statusbar_get_context_id (GTK_STATUSBAR (statusbar), "INFO"), "Sent packet.");
+	  
 }
+
+void quit_app (GtkButton* button, GApplication *app) {
+	g_application_quit (app);
+}
+

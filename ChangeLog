@@ -1,2 +1,15 @@
+2017-06-13  Dirk Gottschalk <dirk.gottschalk1980@googlemail.com>
 
+	* rpm/: Added input script for spec files
+	
+
+
+2017-06-11  Dirk Gottschalk <dirk.gottschalk1980@googlemail.com>
+
+	* all: Developed to first release. Tested and works
+
+
+2017-06-08  Dirk Gottschalk <dirk.gottschalk1980@googlemail.com>
+
+	* all: Prepared GIT repository and initial commit
 
